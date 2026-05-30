@@ -1,0 +1,29 @@
+# Build artifacts
+*.o
+*.obj
+*.a
+*.lib
+*.exe
+*.com
+*.map
+*.err
+build/
+bin/
+
+# Open Watcom intermediates
+*.mbr
+*.lk1
+
+# Editor / OS cruft
+.DS_Store
+*.swp
+*~
+.vscode/
+.idea/
+
+# Local Claude Code settings (user-specific)
+.claude/settings.local.json
+
+# Test binaries
+tests/test_pathconv
+tests/*.test
