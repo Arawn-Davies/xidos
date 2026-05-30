@@ -1,19 +1,27 @@
-# Site
+# Jekyll configuration for the XiDOS documentation site.
+# Served by GitHub Pages from the /docs folder of the main branch.
+
 title: XiDOS
-remote_theme: just-the-docs/just-the-docs
 description: A POSIX compatibility layer for MS-DOS / FreeDOS — Cygwin, but for DOS.
+
+# Public URL. This is a *project* site published under the owner's apex domain,
+# so it lives at https://arawn-davies.co.uk/xidos.
+#   - url     = the scheme + apex domain (owned by the Arawn-Davies.github.io repo)
+#   - baseurl = the project path (this repository's name)
+url: https://arawn-davies.co.uk
+baseurl: /xidos
+
+# Documentation theme (pulled in at build time via the jekyll-remote-theme
+# plugin, which is whitelisted on GitHub Pages).
+remote_theme: just-the-docs/just-the-docs
 color_scheme: dark
-
-# Navigation
 search_enabled: true
+
 aux_links:
-  "XiDOS on GitHub":
+  "View on GitHub":
     - "https://github.com/Arawn-Davies/xidos"
+aux_links_new_tab: true
 
-# Plugins (whitelisted by GitHub Pages)
 plugins:
+  - jekyll-remote-theme
   - jekyll-relative-links
-
-# Don't process repo plumbing as site content.
-exclude:
-  - vendor
