@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+
+gem "jekyll", "~> 4.3"
+gem "just-the-docs"
+
+# Local preview only; GitHub Pages builds via remote_theme.
+gem "github-pages", group: :jekyll_plugins

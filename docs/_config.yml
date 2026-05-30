@@ -1,21 +1,19 @@
-# Jekyll configuration for the XiDOS documentation site.
-#
-# GitHub Pages builds this folder natively (Settings -> Pages -> Source:
-# "Deploy from a branch", branch: main, folder: /docs). No Actions workflow
-# is needed for the docs themselves.
-
+# Site
 title: XiDOS
+remote_theme: just-the-docs/just-the-docs
 description: A POSIX compatibility layer for MS-DOS / FreeDOS — Cygwin, but for DOS.
-theme: jekyll-theme-cayman
+color_scheme: dark
 
-# Link to the source repo from the Cayman header buttons.
-show_downloads: false
+# Navigation
+search_enabled: true
+aux_links:
+  "XiDOS on GitHub":
+    - "https://github.com/Arawn-Davies/xidos"
 
-# So in-repo Markdown links like architecture.md resolve to the built pages.
-# (jekyll-relative-links is enabled by default on GitHub Pages.)
+# Plugins (whitelisted by GitHub Pages)
 plugins:
   - jekyll-relative-links
 
-# Don't try to serve project plumbing as pages.
+# Don't process repo plumbing as site content.
 exclude:
-  - BUILDING.md.bak
+  - vendor

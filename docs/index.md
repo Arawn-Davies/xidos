@@ -1,5 +1,6 @@
 ---
-title: XiDOS
+title: Home
+nav_order: 1
 ---
 
 # XiDOS

@@ -1,5 +1,6 @@
 ---
 title: Building
+nav_order: 3
 ---
 
 # Building XiDOS
