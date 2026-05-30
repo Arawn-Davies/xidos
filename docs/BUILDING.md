@@ -30,12 +30,45 @@ make BACKEND=pmode TOOLCHAIN=djgpp     # pmode on DJGPP
 
    This produces `libxidos.a` (the runtime) and stages the public headers.
 
-## Running the tests
+## Protected-mode toolchain: DJGPP in Docker (pmode)
 
-Tests are compiled to DOS executables and run under an emulator. If
-[DOSBox](https://www.dosbox.com/) (or DOSBox-X) is installed and on your `PATH`,
-`make test` will invoke it automatically; otherwise it prints instructions for
-running the test binaries manually.
+There is no native DJGPP for Apple Silicon, and building the cross-GCC from
+source is slow, so the toolchain lives in a small `linux/amd64` container
+(emulated on arm64 via Docker Desktop / Rosetta). The container *compiles*;
+DOSBox on the host *runs* the resulting `.EXE`.
+
+```sh
+make djgpp-image     # docker build -t xidos-djgpp tools/djgpp  (once)
+```
+
+The image carries the prebuilt DJGPP release (`i586-pc-msdosdjgpp-gcc`,
+GCC 12.2.0) plus `CWSDPMI.EXE`. See `tools/djgpp/Dockerfile`.
+
+## Testing in DOSBox
+
+DJGPP programs are DPMI clients and plain DOSBox provides no DPMI host, so the
+build stages `CWSDPMI.EXE` next to the program; the DJGPP stub loads it
+automatically.
+
+```sh
+make dos          # build SMOKE.EXE, run it in DOSBox, capture & print C:\OUT.TXT
+make dos-debug    # build, then drop into an interactive DOSBox shell (C: mounted)
+```
+
+`make dos` is the automated loop: DOSBox runs the program with stdout
+redirected to `OUT.TXT`, exits, and the host prints the captured text — no
+manual interaction. The DOSBox configs live in `tools/dosbox/`:
+
+| File | Role |
+|------|------|
+| `dosbox-xidos.conf` | machine / CPU / video settings (empty autoexec) |
+| `autoexec-run.conf` | automated: mount C:, run, capture, exit |
+| `autoexec-debug.conf` | interactive: mount C:, drop to a prompt |
+
+## Running the host unit tests
+
+The POSIX<->DOS path logic is host-buildable, so it is unit-tested with the
+host compiler — no DOS environment required:
 
 ```sh
 make test
