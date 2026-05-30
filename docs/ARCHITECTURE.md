@@ -1,3 +1,7 @@
+---
+title: Architecture
+---
+
 # XiDOS Architecture
 
 XiDOS provides a POSIX-like programming interface on top of MS-DOS / FreeDOS.

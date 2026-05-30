@@ -1,0 +1,23 @@
+name: CI
+
+# Host-side unit tests. The DOS backends need a cross toolchain, but the
+# POSIX<->DOS path-conversion logic is host-buildable, so it runs in plain CI.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Host unit tests (${{ matrix.cc }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run unit tests
+        run: make test HOST_CC=${{ matrix.cc }}

@@ -1,3 +1,7 @@
+---
+title: Building
+---
+
 # Building XiDOS
 
 XiDOS is built with a cross toolchain on a modern host and produces DOS binaries.
